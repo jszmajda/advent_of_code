@@ -42,16 +42,14 @@ fn blink_one(n: i64) -> Vec<i64> {
     }
 }
 
-fn blink_stones_iterative_map(mut stones: Vec<i64>, mut times_rem: i64) -> usize {
+fn blink_stones_iterative_map(stones: Vec<i64>, mut times_rem: i64) -> usize {
     let mut fmap: HashMap<i64, usize> = HashMap::new();
     for stone in stones.iter() {
         let last = fmap.get(stone).unwrap_or(&0);
         fmap.insert(*stone, *last + 1);
     }
 
-
     while times_rem > 0 {
-        println!("Iter {}", times_rem);
         let mut new_map: HashMap<i64, usize> = HashMap::new();
         for (key, value) in fmap.drain() {
             let res = blink_one(key);
